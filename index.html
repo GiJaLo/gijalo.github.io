@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mijn 3D Portfolio</title>
+    <title>Mijn Portfolio & Projecten</title>
     <!-- Tailwind CSS voor de opmaak -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,7 +12,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3b82f6', // Blauwe accentkleur
+                        primary: '#3b82f6', // Blauwe accentkleur (aanpasbaar)
                     }
                 }
             }
@@ -23,37 +23,37 @@
     <style>
         /* Zorgt voor een soepele overgang bij het wisselen van dark mode */
         body { transition: background-color 0.3s ease, color 0.3s ease; }
+        html { scroll-behavior: smooth; } /* Zorgt voor soepel scrollen naar secties */
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col font-sans">
 
     <!-- Navigatiebalk -->
-    <header class="sticky top-0 z-20 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+    <header class="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
-                <!-- TIP VOOR EIGEN LOGO: 
-                     Verwijder de <i> tag hieronder, en haal de <img> tag uit commentaar. 
-                     Zorg dat je logo.png in een mapje genaamd 'images' staat! -->
-                <i class="fa-solid fa-cube text-primary mr-2 text-xl"></i>
-                <!-- <img src="images/logo.png" alt="Mijn Logo" class="h-8 w-auto mr-2"> -->
-                <span class="text-xl font-bold tracking-tight" data-i18n="nav_title">3D Portfolio</span>
+                <!-- LOGO: Zet je eigen logo in een /images map of gebruik dit icoon -->
+                <i class="fa-solid fa-layer-group text-primary mr-3 text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight" data-i18n="nav_title">Gijalo Portfolio</span>
             </div>
             
             <!-- Desktop Menu (verborgen op kleine schermen) -->
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#home" class="hover:text-primary transition font-medium" data-i18n="menu_home">Home</a>
-                <a href="#projects" class="hover:text-primary transition font-medium" data-i18n="menu_projects">Projecten</a>
-                <a href="#about" class="hover:text-primary transition font-medium" data-i18n="menu_about">Over Mij</a>
+                <a href="#home" class="hover:text-primary transition font-medium text-sm lg:text-base" data-i18n="menu_home">Home</a>
+                <a href="#3dmodels" class="hover:text-primary transition font-medium text-sm lg:text-base" data-i18n="menu_3d">3D Modellen</a>
+                <a href="#opensource" class="hover:text-primary transition font-medium text-sm lg:text-base" data-i18n="menu_os">Open Source</a>
+                <a href="#articles" class="hover:text-primary transition font-medium text-sm lg:text-base" data-i18n="menu_blog">Artikelen</a>
+                <a href="#about" class="hover:text-primary transition font-medium text-sm lg:text-base" data-i18n="menu_about">Over Mij</a>
                 
-                <div class="flex items-center space-x-3 border-l pl-3 border-gray-300 dark:border-gray-600">
+                <div class="flex items-center space-x-3 border-l pl-4 border-gray-300 dark:border-gray-600">
                     <!-- Taal Schakelaar -->
-                    <button id="lang-toggle" class="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium text-sm">
+                    <button id="lang-toggle" class="px-3 py-1.5 rounded-md bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition font-bold text-xs tracking-wider border border-gray-200 dark:border-gray-600">
                         EN
                     </button>
 
                     <!-- Dark Mode Schakelaar -->
-                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition w-10 h-10 flex items-center justify-center">
-                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition w-9 h-9 flex items-center justify-center border border-gray-200 dark:border-gray-600">
+                        <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
                     </button>
                 </div>
             </nav>
@@ -65,19 +65,21 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 absolute w-full left-0 shadow-lg">
-            <nav class="flex flex-col px-4 py-4 space-y-4">
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 absolute w-full left-0 shadow-2xl">
+            <nav class="flex flex-col px-6 py-6 space-y-5">
                 <a href="#home" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_home">Home</a>
-                <a href="#projects" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_projects">Projecten</a>
+                <a href="#3dmodels" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_3d">3D Modellen</a>
+                <a href="#opensource" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_os">Open Source</a>
+                <a href="#articles" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_blog">Artikelen</a>
                 <a href="#about" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_about">Over Mij</a>
                 
-                <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <span class="text-sm font-medium text-gray-500" data-i18n="settings">Instellingen:</span>
-                    <div class="flex space-x-3">
-                        <button id="lang-toggle-mobile" class="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 transition font-medium">
+                <div class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700 mt-4">
+                    <span class="text-sm font-medium text-gray-500 uppercase tracking-wider" data-i18n="settings">Instellingen</span>
+                    <div class="flex space-x-4">
+                        <button id="lang-toggle-mobile" class="px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 transition font-bold text-sm">
                             EN
                         </button>
-                        <button id="theme-toggle-mobile" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition w-10 h-10 flex items-center justify-center">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 transition w-10 h-10 flex items-center justify-center">
                             <i id="theme-icon-mobile" class="fa-solid fa-moon"></i>
                         </button>
                     </div>
@@ -86,92 +88,239 @@
         </div>
     </header>
 
-    <!-- Hero Sectie (Introductie) -->
     <main class="flex-grow">
-        <section id="home" class="max-w-5xl mx-auto px-4 py-16 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="hero_title">
-                Welkom op mijn 3D Portfolio
+        <!-- ========================================== -->
+        <!-- HERO SECTIE -->
+        <!-- ========================================== -->
+        <section id="home" class="max-w-4xl mx-auto px-4 py-20 md:py-32 text-center">
+            <div class="inline-block mb-4 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary text-sm font-semibold tracking-wide border border-blue-200 dark:border-blue-800" data-i18n="hero_badge">
+                Maker / Ontwikkelaar / 3D Designer
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight" data-i18n="hero_title">
+                Code & Creatie
             </h1>
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8" data-i18n="hero_desc">
-                Ik ben een gepassioneerde maker. Hier vind je al mijn open-source 3D-modellen, projecten en ontwerpen. Klaar om te downloaden en zelf te printen.
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="hero_desc">
+                Welkom in mijn digitale werkplaats. Hier documenteer ik mijn hardware projecten, open-source code en deel ik mijn 3D-print ontwerpen met de community.
             </p>
-            <a href="#projects" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-600 transition">
-                <span data-i18n="hero_button">Bekijk mijn werk</span>
-            </a>
-        </section>
-
-        <!-- Projecten Grid -->
-        <section id="projects" class="max-w-5xl mx-auto px-4 py-12">
-            <h2 class="text-2xl md:text-3xl font-bold mb-8 border-b-2 border-gray-200 dark:border-gray-700 pb-2" data-i18n="projects_title">
-                Mijn Modellen
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Project Kaart 1 -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
-                    <div class="h-48 bg-gray-300 dark:bg-gray-700 relative">
-                        <!-- Vervang deze src door een link naar jouw foto -->
-                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=600" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-xl font-bold mb-2">Raspberry Pi Behuizing</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj1_desc">
-                            Een custom behuizing ontworpen voor optimale koeling en makkelijke toegang tot de GPIO pinnen.
-                        </p>
-                        <div class="flex gap-2 mt-auto">
-                            <a href="#" class="flex-1 text-center bg-[#248ea9] hover:bg-[#1d748a] text-white py-2 rounded-md text-sm font-medium transition">
-                                <i class="fa-solid fa-download mr-1"></i> Thingiverse
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Kaart 2 -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
-                    <div class="h-48 bg-gray-300 dark:bg-gray-700 relative">
-                        <img src="https://images.unsplash.com/photo-1622325368521-b3eb259b1dc7?auto=format&fit=crop&q=80&w=600" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-xl font-bold mb-2">Geometrische Vaas</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj2_desc">
-                            Een moderne, low-poly vaas. Print perfect zonder supports in PLA of PETG.
-                        </p>
-                        <div class="flex gap-2 mt-auto">
-                            <a href="#" class="flex-1 text-center bg-[#6534ff] hover:bg-[#5229cc] text-white py-2 rounded-md text-sm font-medium transition">
-                                <i class="fa-solid fa-cube mr-1"></i> Cults3D
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Kaart 3 -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
-                    <div class="h-48 bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
-                        <i class="fa-solid fa-image text-4xl text-gray-400"></i>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-xl font-bold mb-2">ESP32 Sensor Houder</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj3_desc">
-                            Compacte houder voor een ESP32 microcontroller, inclusief ruimte voor bedrading.
-                        </p>
-                        <div class="flex gap-2 mt-auto">
-                            <a href="#" class="flex-1 text-center bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 rounded-md text-sm font-medium transition" data-i18n="coming_soon">
-                                Binnenkort beschikbaar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#3dmodels" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold shadow-lg shadow-blue-500/30 hover:bg-blue-600 transition hover:-translate-y-1">
+                    <i class="fa-solid fa-cube mr-2"></i> <span data-i18n="hero_btn_3d">3D Modellen</span>
+                </a>
+                <a href="#opensource" class="bg-gray-800 dark:bg-gray-100 text-white dark:text-gray-900 px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-700 dark:hover:bg-white transition hover:-translate-y-1">
+                    <i class="fa-brands fa-github mr-2"></i> <span data-i18n="hero_btn_code">Mijn Code</span>
+                </a>
             </div>
         </section>
+
+        <!-- ========================================== -->
+        <!-- SECTIE 1: 3D MODELLEN (Thingiverse/Cults) -->
+        <!-- ========================================== -->
+        <section id="3dmodels" class="bg-white dark:bg-gray-800/50 py-16 border-y border-gray-200 dark:border-gray-800">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <i class="fa-solid fa-cubes text-3xl text-primary mr-4"></i>
+                    <h2 class="text-3xl font-bold" data-i18n="3d_title">3D Print Ontwerpen</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 3D Kaart 1 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col group hover:shadow-xl transition-all">
+                        <div class="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=600" alt="[Image of 3D Model]" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2">Monitor Stand</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow" data-i18n="3d_desc1">
+                                Een stevige, modulaire monitorstandaard ontworpen om zonder supports te printen. Bevat kabelmanagement.
+                            </p>
+                            <a href="#" class="w-full block text-center bg-[#248ea9] hover:bg-[#1d748a] text-white py-2.5 rounded-lg text-sm font-semibold transition">
+                                <i class="fa-solid fa-download mr-1"></i> Download op Thingiverse
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 3D Kaart 2 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col group hover:shadow-xl transition-all">
+                        <div class="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1622325368521-b3eb259b1dc7?auto=format&fit=crop&q=80&w=600" alt="" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2">Art Deco Vaas</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow" data-i18n="3d_desc2">
+                                Een vaas geoptimaliseerd voor 'Vase Mode' (Spiraal contouren). Print perfect in transparant PETG.
+                            </p>
+                            <a href="#" class="w-full block text-center bg-[#6534ff] hover:bg-[#5229cc] text-white py-2.5 rounded-lg text-sm font-semibold transition">
+                                <i class="fa-solid fa-cube mr-1"></i> Bekijk op Cults3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTIE 2: OPEN SOURCE (Code & Elektronica) -->
+        <!-- ========================================== -->
+        <section id="opensource" class="py-16">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <i class="fa-solid fa-code-branch text-3xl text-primary mr-4"></i>
+                    <h2 class="text-3xl font-bold" data-i18n="os_title">Open Source Projecten</h2>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl" data-i18n="os_intro">
+                    Een overzicht van mijn scripts, elektronica projecten en code. Alles is open-source en beschikbaar op mijn GitHub.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Open Source Project 1 (Voorbeeld Raspberry Pi / ESP32) -->
+                    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">RPI-ESP32 Bridge</h3>
+                            <i class="fa-brands fa-python text-2xl text-yellow-500"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4" data-i18n="os_proj1_desc">
+                            Een custom communicatie bridge. Pin 8 van de Raspberry Pi is direct verbonden met pin G16 van de ESP32 (MAC: 88:57:21:B7:73:90). Script bevat error handling en data logging.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">Python</span>
+                            <span class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">C++ (Arduino)</span>
+                            <span class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">Hardware</span>
+                        </div>
+                        <a href="https://github.com/gijalo" target="_blank" class="text-primary font-medium hover:underline text-sm flex items-center">
+                            Bekijk Source Code <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Open Source Project 2 -->
+                    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Portfolio Template</h3>
+                            <i class="fa-brands fa-html5 text-2xl text-orange-500"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4" data-i18n="os_proj2_desc">
+                            De broncode van deze website. Een lichtgewicht, single-page portfolio gebouwd met HTML, Tailwind CSS en simpele Vanilla JavaScript voor dark-mode en vertalingen.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">HTML/CSS</span>
+                            <span class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">Tailwind</span>
+                        </div>
+                        <a href="https://github.com/gijalo/gijalo.github.io" target="_blank" class="text-primary font-medium hover:underline text-sm flex items-center">
+                            Bekijk Source Code <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTIE 3: ARTIKELEN / BLOG (Waar je over onderwerpen schrijft) -->
+        <!-- ========================================== -->
+        <section id="articles" class="bg-gray-100 dark:bg-gray-800/80 py-16 border-y border-gray-200 dark:border-gray-800">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center justify-between mb-8 border-b border-gray-300 dark:border-gray-700 pb-4">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-pen-nib text-3xl text-primary mr-4"></i>
+                        <h2 class="text-3xl font-bold" data-i18n="blog_title">Documentatie & Artikelen</h2>
+                    </div>
+                </div>
+                
+                <!-- Tip comment voor de gebruiker: -->
+                <!-- Maak hieronder nieuwe kaartjes aan als je een nieuw artikel schrijft. 
+                     Je kunt de 'href' later laten wijzen naar bv 'artikel-esp32.html' -->
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Artikel 1 -->
+                    <a href="#articles" class="group bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition flex flex-col sm:flex-row gap-6">
+                        <div class="sm:w-1/3 h-32 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shrink-0">
+                            <!-- Optionele thumbnail -->
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=400" alt="[Image of article]" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <span class="text-xs font-bold text-primary mb-2 tracking-wider uppercase">Tutorial</span>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition" data-i18n="art1_title">Communicatie tussen RPi en ESP32</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2" data-i18n="art1_desc">
+                                Een diepe duik in hoe ik data betrouwbaar verzend tussen een Raspberry Pi en een microcontroller via seriële communicatie.
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- Artikel 2 -->
+                    <a href="#articles" class="group bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition flex flex-col sm:flex-row gap-6">
+                        <div class="sm:w-1/3 h-32 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
+                           <i class="fa-solid fa-layer-group text-4xl text-gray-400"></i>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <span class="text-xs font-bold text-primary mb-2 tracking-wider uppercase">3D Printen</span>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition" data-i18n="art2_title">Mijn perfecte PETG instellingen</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2" data-i18n="art2_desc">
+                                Na maanden experimenteren heb ik eindelijk de instellingen gevonden waarmee ik stringing volledig voorkom. Lees mijn Cura profiel door.
+                            </p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTIE 4: OVER MIJ -->
+        <!-- ========================================== -->
+        <section id="about" class="py-20">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center">
+                    
+                    <!-- Profielfoto / Avatar -->
+                    <div class="w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full border-4 border-gray-100 dark:border-gray-700 overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-inner">
+                        <!-- Voeg hier in de images map je eigen foto toe, bv: src="images/profielfoto.jpg" -->
+                        <i class="fa-solid fa-user text-6xl text-gray-400 mt-12 md:mt-16 ml-12 md:ml-20 absolute"></i>
+                        <!-- <img src="images/profielfoto.jpg" alt="Mijn foto" class="w-full h-full object-cover relative z-10"> -->
+                    </div>
+
+                    <!-- Bio Tekst -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4" data-i18n="about_title">Over Mij</h2>
+                        <h3 class="text-lg text-primary font-medium mb-4">Maker & Coder uit België</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed" data-i18n="about_p1">
+                            Hallo! Ik ben de persoon achter Gijalo. Ik hou me graag bezig met de grens tussen hardware en software. Van het schrijven van scripts tot het 3D-ontwerpen van functionele onderdelen in Fusion360.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-i18n="about_p2">
+                            Mijn doel met deze website is om mijn kennis open-source te delen met andere hobbyisten en professionals. Als ik niet aan het coderen ben, staat mijn 3D printer waarschijnlijk te draaien.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 py-8 text-center">
-        <p class="text-gray-500 dark:text-gray-400" data-i18n="footer_text">
-            © 2026 Gemaakt met passie voor 3D printen. Geen tracking cookies gebruikt.
-        </p>
+    <!-- ========================================== -->
+    <!-- FOOTER & SOCIALS -->
+    <!-- ========================================== -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            
+            <div class="text-center md:text-left">
+                <div class="font-bold text-xl text-white tracking-wider mb-2">GIJALO</div>
+                <p class="text-sm text-gray-500" data-i18n="footer_text">
+                    © 2026 Gemaakt met passie. Geen tracking cookies gebruikt.
+                </p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex space-x-5">
+                <a href="https://github.com/gijalo" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition" title="GitHub">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#248ea9] hover:text-white transition" title="Thingiverse">
+                    <i class="fa-solid fa-download text-lg"></i>
+                </a>
+                <a href="mailto:jouw@email.be" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition" title="Email Mij">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                </a>
+            </div>
+
+        </div>
     </footer>
 
     <!-- JavaScript voor Functionaliteit (Dark mode & Talen) -->
@@ -185,18 +334,18 @@
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('color-theme', 'dark');
                 themeIcons.forEach(icon => {
-                    if(icon) icon.className = 'fa-solid fa-sun'; // Forceert altijd het zonnetje in donkere modus
+                    if(icon) icon.className = 'fa-solid fa-sun text-sm'; // Zonnetje
                 });
             } else {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
                 themeIcons.forEach(icon => {
-                    if(icon) icon.className = 'fa-solid fa-moon'; // Forceert altijd het maantje in lichte modus
+                    if(icon) icon.className = 'fa-solid fa-moon text-sm'; // Maantje
                 });
             }
         }
 
-        // Controleer of er al een voorkeur is opgeslagen, of kijk naar de systeeminstellingen
+        // Init check
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             setDarkMode(true);
         } else {
@@ -221,13 +370,12 @@
             mobileMenu.classList.toggle('hidden');
             const icon = mobileMenuBtn.querySelector('i');
             if(mobileMenu.classList.contains('hidden')) {
-                icon.className = 'fa-solid fa-bars text-2xl'; // 3 streepjes
+                icon.className = 'fa-solid fa-bars text-2xl'; 
             } else {
-                icon.className = 'fa-solid fa-xmark text-2xl'; // Kruisje
+                icon.className = 'fa-solid fa-xmark text-2xl'; 
             }
         });
 
-        // Sluit het mobiele menu automatisch als je op een link klikt
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -238,42 +386,81 @@
         // --- 2. VERTAAL LOGICA (NL / EN) ---
         const translations = {
             nl: {
-                nav_title: "3D Portfolio",
+                nav_title: "Gijalo Portfolio",
                 menu_home: "Home",
-                menu_projects: "Projecten",
+                menu_3d: "3D Modellen",
+                menu_os: "Open Source",
+                menu_blog: "Artikelen",
                 menu_about: "Over Mij",
-                settings: "Instellingen:",
-                hero_title: "Welkom op mijn 3D Portfolio",
-                hero_desc: "Ik ben een gepassioneerde maker. Hier vind je al mijn open-source 3D-modellen, projecten en ontwerpen. Klaar om te downloaden en zelf te printen.",
-                hero_button: "Bekijk mijn werk",
-                projects_title: "Mijn Modellen",
-                proj1_desc: "Een custom behuizing ontworpen voor optimale koeling en makkelijke toegang tot de GPIO pinnen.",
-                proj2_desc: "Een moderne, low-poly vaas. Print perfect zonder supports in PLA of PETG.",
-                proj3_desc: "Compacte houder voor een ESP32 microcontroller, inclusief ruimte voor bedrading.",
-                coming_soon: "Binnenkort beschikbaar",
-                footer_text: "© 2026 Gemaakt met passie voor 3D printen. Geen tracking cookies gebruikt."
+                settings: "Instellingen",
+                
+                hero_badge: "Maker / Ontwikkelaar / 3D Designer",
+                hero_title: "Code & Creatie",
+                hero_desc: "Welkom in mijn digitale werkplaats. Hier documenteer ik mijn hardware projecten, open-source code en deel ik mijn 3D-print ontwerpen met de community.",
+                hero_btn_3d: "3D Modellen",
+                hero_btn_code: "Mijn Code",
+                
+                "3d_title": "3D Print Ontwerpen",
+                "3d_desc1": "Een stevige, modulaire monitorstandaard ontworpen om zonder supports te printen. Bevat kabelmanagement.",
+                "3d_desc2": "Een vaas geoptimaliseerd voor 'Vase Mode' (Spiraal contouren). Print perfect in transparant PETG.",
+                
+                os_title: "Open Source Projecten",
+                os_intro: "Een overzicht van mijn scripts, elektronica projecten en code. Alles is open-source en beschikbaar op mijn GitHub.",
+                os_proj1_desc: "Een custom communicatie bridge. Pin 8 van de Raspberry Pi is direct verbonden met pin G16 van de ESP32 (MAC: 88:57:21:B7:73:90). Script bevat error handling en data logging.",
+                os_proj2_desc: "De broncode van deze website. Een lichtgewicht, single-page portfolio gebouwd met HTML, Tailwind CSS en simpele Vanilla JavaScript.",
+                
+                blog_title: "Documentatie & Artikelen",
+                art1_title: "Communicatie tussen RPi en ESP32",
+                art1_desc: "Een diepe duik in hoe ik data betrouwbaar verzend tussen een Raspberry Pi en een microcontroller via seriële communicatie.",
+                art2_title: "Mijn perfecte PETG instellingen",
+                art2_desc: "Na maanden experimenteren heb ik eindelijk de instellingen gevonden waarmee ik stringing volledig voorkom. Lees mijn Cura profiel door.",
+
+                about_title: "Over Mij",
+                about_p1: "Hallo! Ik ben de persoon achter Gijalo. Ik hou me graag bezig met de grens tussen hardware en software. Van het schrijven van scripts tot het 3D-ontwerpen van functionele onderdelen in Fusion360.",
+                about_p2: "Mijn doel met deze website is om mijn kennis open-source te delen met andere hobbyisten en professionals. Als ik niet aan het coderen ben, staat mijn 3D printer waarschijnlijk te draaien.",
+                
+                footer_text: "© 2026 Gemaakt met passie. Geen tracking cookies gebruikt."
             },
             en: {
-                nav_title: "3D Portfolio",
+                nav_title: "Gijalo Portfolio",
                 menu_home: "Home",
-                menu_projects: "Projects",
+                menu_3d: "3D Models",
+                menu_os: "Open Source",
+                menu_blog: "Articles",
                 menu_about: "About Me",
-                settings: "Settings:",
-                hero_title: "Welcome to my 3D Portfolio",
-                hero_desc: "I am a passionate maker. Here you can find all my open-source 3D models, projects, and designs. Ready to download and print yourself.",
-                hero_button: "View my work",
-                projects_title: "My Models",
-                proj1_desc: "A custom case designed for optimal cooling and easy access to the GPIO pins.",
-                proj2_desc: "A modern, low-poly vase. Prints perfectly without supports in PLA or PETG.",
-                proj3_desc: "Compact mount for an ESP32 microcontroller, including space for wiring.",
-                coming_soon: "Coming soon",
-                footer_text: "© 2026 Made with passion for 3D printing. No tracking cookies used."
+                settings: "Settings",
+                
+                hero_badge: "Maker / Developer / 3D Designer",
+                hero_title: "Code & Creation",
+                hero_desc: "Welcome to my digital workshop. Here I document my hardware projects, open-source code and share my 3D-print designs with the community.",
+                hero_btn_3d: "3D Models",
+                hero_btn_code: "My Code",
+                
+                "3d_title": "3D Print Designs",
+                "3d_desc1": "A sturdy, modular monitor stand designed to print without supports. Includes cable management.",
+                "3d_desc2": "A vase optimized for 'Vase Mode' (Spiral contours). Prints perfectly in transparent PETG.",
+                
+                os_title: "Open Source Projects",
+                os_intro: "An overview of my scripts, electronics projects and code. Everything is open-source and available on my GitHub.",
+                os_proj1_desc: "A custom communication bridge. Pin 8 of the Raspberry Pi is directly connected to pin G16 of the ESP32 (MAC: 88:57:21:B7:73:90). Script includes error handling and data logging.",
+                os_proj2_desc: "The source code of this website. A lightweight, single-page portfolio built with HTML, Tailwind CSS and simple Vanilla JavaScript.",
+                
+                blog_title: "Documentation & Articles",
+                art1_title: "Communication between RPi and ESP32",
+                art1_desc: "A deep dive into how I reliably transmit data between a Raspberry Pi and a microcontroller via serial communication.",
+                art2_title: "My perfect PETG settings",
+                art2_desc: "After months of experimenting, I finally found the settings that completely prevent stringing. Read through my Cura profile.",
+
+                about_title: "About Me",
+                about_p1: "Hello! I am the person behind Gijalo. I love working on the border between hardware and software. From writing scripts to 3D-designing functional parts in Fusion360.",
+                about_p2: "My goal with this website is to share my knowledge open-source with other hobbyists and professionals. When I'm not coding, my 3D printer is probably running.",
+                
+                footer_text: "© 2026 Made with passion. No tracking cookies used."
             }
         };
 
         const langToggleBtns = [document.getElementById('lang-toggle'), document.getElementById('lang-toggle-mobile')];
         
-        // Bepaal de standaardtaal op basis van de browser, of wat er eerder is gekozen
         let currentLang = localStorage.getItem('language');
         if (!currentLang) {
             const browserLang = navigator.language || navigator.userLanguage;
@@ -281,7 +468,6 @@
         }
 
         function updateTexts() {
-            // Zoek alle elementen met een data-i18n attribuut
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -289,7 +475,6 @@
                     el.textContent = translations[currentLang][key];
                 }
             });
-            // Update de tekst op beide knoppen
             langToggleBtns.forEach(btn => {
                 if(btn) btn.textContent = currentLang === 'nl' ? 'EN' : 'NL';
             });
@@ -297,7 +482,6 @@
             localStorage.setItem('language', currentLang);
         }
 
-        // Wissel taal bij klikken
         langToggleBtns.forEach(btn => {
             if(btn) {
                 btn.addEventListener('click', () => {
@@ -307,7 +491,7 @@
             }
         });
 
-        // Voer de vertaling direct uit bij het inladen
+        // Init language
         updateTexts();
     </script>
 </body>
