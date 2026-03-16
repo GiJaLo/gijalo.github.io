@@ -1,1 +1,314 @@
-<H1>Portfolio</H1>
+<!DOCTYPE html>
+<html lang="nl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn 3D Portfolio</title>
+    <!-- Tailwind CSS voor de opmaak -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', // Blauwe accentkleur
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Icoontjes via FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Zorgt voor een soepele overgang bij het wisselen van dark mode */
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navigatiebalk -->
+    <header class="sticky top-0 z-20 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- TIP VOOR EIGEN LOGO: 
+                     Verwijder de <i> tag hieronder, en haal de <img> tag uit commentaar. 
+                     Zorg dat je logo.png in een mapje genaamd 'images' staat! -->
+                <i class="fa-solid fa-cube text-primary mr-2 text-xl"></i>
+                <!-- <img src="images/logo.png" alt="Mijn Logo" class="h-8 w-auto mr-2"> -->
+                <span class="text-xl font-bold tracking-tight" data-i18n="nav_title">3D Portfolio</span>
+            </div>
+            
+            <!-- Desktop Menu (verborgen op kleine schermen) -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="hover:text-primary transition font-medium" data-i18n="menu_home">Home</a>
+                <a href="#projects" class="hover:text-primary transition font-medium" data-i18n="menu_projects">Projecten</a>
+                <a href="#about" class="hover:text-primary transition font-medium" data-i18n="menu_about">Over Mij</a>
+                
+                <div class="flex items-center space-x-3 border-l pl-3 border-gray-300 dark:border-gray-600">
+                    <!-- Taal Schakelaar -->
+                    <button id="lang-toggle" class="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium text-sm">
+                        EN
+                    </button>
+
+                    <!-- Dark Mode Schakelaar -->
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition w-10 h-10 flex items-center justify-center">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Hamburger Knop -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-primary focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 absolute w-full left-0 shadow-lg">
+            <nav class="flex flex-col px-4 py-4 space-y-4">
+                <a href="#home" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_home">Home</a>
+                <a href="#projects" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_projects">Projecten</a>
+                <a href="#about" class="mobile-link block text-lg font-medium hover:text-primary" data-i18n="menu_about">Over Mij</a>
+                
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <span class="text-sm font-medium text-gray-500" data-i18n="settings">Instellingen:</span>
+                    <div class="flex space-x-3">
+                        <button id="lang-toggle-mobile" class="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 transition font-medium">
+                            EN
+                        </button>
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition w-10 h-10 flex items-center justify-center">
+                            <i id="theme-icon-mobile" class="fa-solid fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Sectie (Introductie) -->
+    <main class="flex-grow">
+        <section id="home" class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="hero_title">
+                Welkom op mijn 3D Portfolio
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8" data-i18n="hero_desc">
+                Ik ben een gepassioneerde maker. Hier vind je al mijn open-source 3D-modellen, projecten en ontwerpen. Klaar om te downloaden en zelf te printen.
+            </p>
+            <a href="#projects" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-600 transition">
+                <span data-i18n="hero_button">Bekijk mijn werk</span>
+            </a>
+        </section>
+
+        <!-- Projecten Grid -->
+        <section id="projects" class="max-w-5xl mx-auto px-4 py-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 border-b-2 border-gray-200 dark:border-gray-700 pb-2" data-i18n="projects_title">
+                Mijn Modellen
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Kaart 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
+                    <div class="h-48 bg-gray-300 dark:bg-gray-700 relative">
+                        <!-- Vervang deze src door een link naar jouw foto -->
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=600" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold mb-2">Raspberry Pi Behuizing</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj1_desc">
+                            Een custom behuizing ontworpen voor optimale koeling en makkelijke toegang tot de GPIO pinnen.
+                        </p>
+                        <div class="flex gap-2 mt-auto">
+                            <a href="#" class="flex-1 text-center bg-[#248ea9] hover:bg-[#1d748a] text-white py-2 rounded-md text-sm font-medium transition">
+                                <i class="fa-solid fa-download mr-1"></i> Thingiverse
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Kaart 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
+                    <div class="h-48 bg-gray-300 dark:bg-gray-700 relative">
+                        <img src="https://images.unsplash.com/photo-1622325368521-b3eb259b1dc7?auto=format&fit=crop&q=80&w=600" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold mb-2">Geometrische Vaas</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj2_desc">
+                            Een moderne, low-poly vaas. Print perfect zonder supports in PLA of PETG.
+                        </p>
+                        <div class="flex gap-2 mt-auto">
+                            <a href="#" class="flex-1 text-center bg-[#6534ff] hover:bg-[#5229cc] text-white py-2 rounded-md text-sm font-medium transition">
+                                <i class="fa-solid fa-cube mr-1"></i> Cults3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Kaart 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
+                    <div class="h-48 bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
+                        <i class="fa-solid fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold mb-2">ESP32 Sensor Houder</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow" data-i18n="proj3_desc">
+                            Compacte houder voor een ESP32 microcontroller, inclusief ruimte voor bedrading.
+                        </p>
+                        <div class="flex gap-2 mt-auto">
+                            <a href="#" class="flex-1 text-center bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 rounded-md text-sm font-medium transition" data-i18n="coming_soon">
+                                Binnenkort beschikbaar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400" data-i18n="footer_text">
+            © 2026 Gemaakt met passie voor 3D printen. Geen tracking cookies gebruikt.
+        </p>
+    </footer>
+
+    <!-- JavaScript voor Functionaliteit (Dark mode & Talen) -->
+    <script>
+        // --- 1. DARK MODE LOGICA ---
+        const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+        const themeIcons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
+        
+        function setDarkMode(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                themeIcons.forEach(icon => {
+                    if(icon) icon.className = 'fa-solid fa-sun'; // Forceert altijd het zonnetje in donkere modus
+                });
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                themeIcons.forEach(icon => {
+                    if(icon) icon.className = 'fa-solid fa-moon'; // Forceert altijd het maantje in lichte modus
+                });
+            }
+        }
+
+        // Controleer of er al een voorkeur is opgeslagen, of kijk naar de systeeminstellingen
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setDarkMode(true);
+        } else {
+            setDarkMode(false);
+        }
+
+        themeToggleBtns.forEach(btn => {
+            if(btn) {
+                btn.addEventListener('click', function() {
+                    const isDark = document.documentElement.classList.contains('dark');
+                    setDarkMode(!isDark);
+                });
+            }
+        });
+
+        // --- 1.5. MOBILE MENU LOGICA ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if(mobileMenu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-2xl'; // 3 streepjes
+            } else {
+                icon.className = 'fa-solid fa-xmark text-2xl'; // Kruisje
+            }
+        });
+
+        // Sluit het mobiele menu automatisch als je op een link klikt
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars text-2xl';
+            });
+        });
+
+        // --- 2. VERTAAL LOGICA (NL / EN) ---
+        const translations = {
+            nl: {
+                nav_title: "3D Portfolio",
+                menu_home: "Home",
+                menu_projects: "Projecten",
+                menu_about: "Over Mij",
+                settings: "Instellingen:",
+                hero_title: "Welkom op mijn 3D Portfolio",
+                hero_desc: "Ik ben een gepassioneerde maker. Hier vind je al mijn open-source 3D-modellen, projecten en ontwerpen. Klaar om te downloaden en zelf te printen.",
+                hero_button: "Bekijk mijn werk",
+                projects_title: "Mijn Modellen",
+                proj1_desc: "Een custom behuizing ontworpen voor optimale koeling en makkelijke toegang tot de GPIO pinnen.",
+                proj2_desc: "Een moderne, low-poly vaas. Print perfect zonder supports in PLA of PETG.",
+                proj3_desc: "Compacte houder voor een ESP32 microcontroller, inclusief ruimte voor bedrading.",
+                coming_soon: "Binnenkort beschikbaar",
+                footer_text: "© 2026 Gemaakt met passie voor 3D printen. Geen tracking cookies gebruikt."
+            },
+            en: {
+                nav_title: "3D Portfolio",
+                menu_home: "Home",
+                menu_projects: "Projects",
+                menu_about: "About Me",
+                settings: "Settings:",
+                hero_title: "Welcome to my 3D Portfolio",
+                hero_desc: "I am a passionate maker. Here you can find all my open-source 3D models, projects, and designs. Ready to download and print yourself.",
+                hero_button: "View my work",
+                projects_title: "My Models",
+                proj1_desc: "A custom case designed for optimal cooling and easy access to the GPIO pins.",
+                proj2_desc: "A modern, low-poly vase. Prints perfectly without supports in PLA or PETG.",
+                proj3_desc: "Compact mount for an ESP32 microcontroller, including space for wiring.",
+                coming_soon: "Coming soon",
+                footer_text: "© 2026 Made with passion for 3D printing. No tracking cookies used."
+            }
+        };
+
+        const langToggleBtns = [document.getElementById('lang-toggle'), document.getElementById('lang-toggle-mobile')];
+        
+        // Bepaal de standaardtaal op basis van de browser, of wat er eerder is gekozen
+        let currentLang = localStorage.getItem('language');
+        if (!currentLang) {
+            const browserLang = navigator.language || navigator.userLanguage;
+            currentLang = browserLang.startsWith('nl') ? 'nl' : 'en';
+        }
+
+        function updateTexts() {
+            // Zoek alle elementen met een data-i18n attribuut
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            // Update de tekst op beide knoppen
+            langToggleBtns.forEach(btn => {
+                if(btn) btn.textContent = currentLang === 'nl' ? 'EN' : 'NL';
+            });
+            document.documentElement.lang = currentLang;
+            localStorage.setItem('language', currentLang);
+        }
+
+        // Wissel taal bij klikken
+        langToggleBtns.forEach(btn => {
+            if(btn) {
+                btn.addEventListener('click', () => {
+                    currentLang = currentLang === 'nl' ? 'en' : 'nl';
+                    updateTexts();
+                });
+            }
+        });
+
+        // Voer de vertaling direct uit bij het inladen
+        updateTexts();
+    </script>
+</body>
+</html>
